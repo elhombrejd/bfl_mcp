@@ -26,7 +26,11 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Development and documentation files
 test.js
+SETUP_REPOSITORIO.md
+PROJETO_RESUMO.md
 
 # Logs
 logs/
