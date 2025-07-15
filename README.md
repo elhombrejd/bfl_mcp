@@ -18,7 +18,7 @@ Model Context Protocol (MCP) server for Black Forest Labs FLUX image generation 
 
 ```bash
 # Run the MCP server with your BFL API key
-npx @elhombrehd/bfl-mcp-server YOUR_BFL_API_KEY
+npx bfl-mcp-server YOUR_BFL_API_KEY
 ```
 
 ### Environment Variable
@@ -26,7 +26,7 @@ npx @elhombrehd/bfl-mcp-server YOUR_BFL_API_KEY
 ```bash
 # Set environment variable
 export BFL_API_KEY="your-api-key-here"
-npx @elhombrehd/bfl-mcp-server
+npx bfl-mcp-server
 ```
 
 ## IDE Integration
@@ -40,7 +40,7 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
   "mcpServers": {
     "bfl": {
       "command": "npx",
-      "args": ["@elhombrehd/bfl-mcp-server"],
+      "args": ["bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "your-api-key-here"
       }
@@ -53,7 +53,7 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
 
 1. **Via CLI Wizard** (Recommended):
 ```bash
-claude mcp add bfl-server -e BFL_API_KEY=your-api-key-here -- npx @elhombrehd/bfl-mcp-server
+claude mcp add bfl-server -e BFL_API_KEY=your-api-key-here -- npx bfl-mcp-server
 ```
 
 2. **Via .claude.json** (Project-specific):
@@ -63,7 +63,7 @@ Create or edit `.claude.json` in your project root:
   "mcpServers": {
     "bfl": {
       "command": "npx",
-      "args": ["@elhombrehd/bfl-mcp-server"],
+      "args": ["bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "your-api-key-here"
       }
@@ -78,7 +78,7 @@ Create or edit `.claude.json` in your project root:
   "mcpServers": {
     "bfl": {
       "command": "npx",
-      "args": ["@elhombrehd/bfl-mcp-server"],
+      "args": ["bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "${BFL_API_KEY}"
       }
@@ -97,7 +97,7 @@ Create or edit `.claude.json` in your project root:
   "mcpServers": {
     "bfl": {
       "command": "npx",
-      "args": ["-y", "@elhombrehd/bfl-mcp-server"],
+      "args": ["-y", "bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "your-api-key-here"
       }
@@ -112,7 +112,7 @@ Create or edit `.claude.json` in your project root:
   "mcpServers": {
     "bfl": {
       "command": "npx",
-      "args": ["-y", "@elhombrehd/bfl-mcp-server"],
+      "args": ["-y", "bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "your-api-key-here"
       }
@@ -137,7 +137,7 @@ Create or edit `.claude.json` in your project root:
   "mcpServers": {
     "bfl": {
       "command": "npx",
-      "args": ["-y", "@elhombrehd/bfl-mcp-server"],
+      "args": ["-y", "bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "your-api-key-here"
       }
@@ -221,7 +221,7 @@ After configuring in any IDE, you should see:
 Test manually before IDE integration:
 ```bash
 # Test the server directly
-npx @elhombrehd/bfl-mcp-server your-api-key
+npx bfl-mcp-server your-api-key
 
 # Should show: "BFL MCP Server running on stdio"
 ```
