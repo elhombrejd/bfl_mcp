@@ -1,13 +1,16 @@
 # BFL MCP Server
 
-Model Context Protocol (MCP) server for Black Forest Labs image generation and editing using FLUX.1 Kontext.
+Model Context Protocol (MCP) server for Black Forest Labs FLUX image generation and editing using FLUX.1 Kontext Pro.
+
+> 🎨 **Create and edit images with AI using natural language through the MCP protocol**
 
 ## Features
 
-- 🎨 **Image Generation**: Generate high-quality images from text prompts using FLUX.1 Kontext
+- 🎨 **Image Generation**: Generate high-quality images from text prompts using FLUX.1 Kontext Pro
 - ✏️ **Image Editing**: Edit existing images with natural language instructions  
 - 🚀 **Easy Installation**: Run directly with npx - no local setup required
 - 🔧 **Configurable**: Support for aspect ratios, seeds, safety settings, and output formats
+- 🔗 **MCP Compatible**: Works with Claude Desktop, Claude Code, and other MCP clients
 
 ## Installation & Usage
 
@@ -15,7 +18,7 @@ Model Context Protocol (MCP) server for Black Forest Labs image generation and e
 
 ```bash
 # Run the MCP server with your BFL API key
-npx @bfl/mcp-server YOUR_BFL_API_KEY
+npx @elhombrejd/bfl-mcp-server YOUR_BFL_API_KEY
 ```
 
 ### Environment Variable
@@ -23,7 +26,7 @@ npx @bfl/mcp-server YOUR_BFL_API_KEY
 ```bash
 # Set environment variable
 export BFL_API_KEY="your-api-key-here"
-npx @bfl/mcp-server
+npx @elhombrejd/bfl-mcp-server
 ```
 
 ### Claude Desktop Integration
@@ -35,7 +38,7 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
   "mcpServers": {
     "bfl": {
       "command": "npx",
-      "args": ["@bfl/mcp-server"],
+      "args": ["@elhombrejd/bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "your-api-key-here"
       }
@@ -112,8 +115,8 @@ Get your API key from [Black Forest Labs](https://bfl.ai/pricing/api).
 
 ```bash
 # Clone and install
-git clone <repository>
-cd bfl_mcp
+git clone https://github.com/elhombrejd/bfl-mcp-server.git
+cd bfl-mcp-server
 npm install
 
 # Build
@@ -130,11 +133,24 @@ BFL_API_KEY="your-key" npm run dev
 node test.js
 ```
 
+## Author
+
+Created by **[@elhombrejd](https://github.com/elhombrejd)**
+
 ## License
 
 MIT
 
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
 ## Support
 
-For issues with the MCP server, please open an issue on GitHub.
-For BFL API questions, visit [BFL Documentation](https://docs.bfl.ai/).
+- **Issues**: [GitHub Issues](https://github.com/elhombrejd/bfl-mcp-server/issues)
+- **BFL API Documentation**: [docs.bfl.ai](https://docs.bfl.ai/)
+- **MCP Protocol**: [Model Context Protocol](https://github.com/modelcontextprotocol)
+
+## Repository
+
+🔗 **GitHub**: [github.com/elhombrejd/bfl-mcp-server](https://github.com/elhombrejd/bfl-mcp-server)

@@ -4,6 +4,9 @@
 
 Servidor MCP (Model Context Protocol) para integração com a API da Black Forest Labs, permitindo geração e edição de imagens usando o modelo FLUX.1 Kontext Pro.
 
+**Desenvolvido por**: [@elhombrejd](https://github.com/elhombrejd)  
+**Repositório**: `bfl-mcp-server`
+
 ## 🎯 Objetivos Alcançados
 
 ### ✅ 1. Pesquisa e Documentação
@@ -25,7 +28,7 @@ Servidor MCP (Model Context Protocol) para integração com a API da Black Fores
 - **URLs Temporárias**: Manejo adequado dos links com validade de 10 minutos
 
 ### ✅ 4. Executável via NPX
-- **Estrutura de Pacote**: Configurado para `npx @bfl/mcp-server`
+- **Estrutura de Pacote**: Configurado para `npx @elhombrejd/bfl-mcp-server`
 - **Bin Configuration**: Executável direto sem instalação local
 - **Variáveis de Ambiente**: Suporte para `BFL_API_KEY`
 - **Argumentos CLI**: Aceita chave API como parâmetro
@@ -45,7 +48,7 @@ Servidor MCP (Model Context Protocol) para integração com a API da Black Fores
 ## 🔧 Estrutura Técnica
 
 ```
-bfl_mcp/
+bfl-mcp-server/
 ├── src/
 │   ├── types.ts          # Definições TypeScript
 │   ├── bfl-client.ts     # Cliente da API BFL
@@ -53,14 +56,15 @@ bfl_mcp/
 ├── package.json          # Configuração NPX
 ├── tsconfig.json         # Configuração TypeScript
 ├── .gitignore           # Exclusões Git
-└── README.md            # Documentação
+├── README.md            # Documentação
+└── PROJETO_RESUMO.md    # Este resumo
 ```
 
 ## 🚀 Como Usar
 
 ### Instalação Rápida
 ```bash
-npx @bfl/mcp-server YOUR_BFL_API_KEY
+npx @elhombrejd/bfl-mcp-server YOUR_BFL_API_KEY
 ```
 
 ### Claude Desktop
@@ -69,7 +73,7 @@ npx @bfl/mcp-server YOUR_BFL_API_KEY
   "mcpServers": {
     "bfl": {
       "command": "npx",
-      "args": ["@bfl/mcp-server"],
+      "args": ["@elhombrejd/bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "sua-chave-aqui"
       }
@@ -126,11 +130,17 @@ O servidor MCP está:
 ## 📦 Próximos Passos
 
 Para publicar no NPM:
-1. Criar conta no NPM
-2. `npm publish` (organizando nome do pacote)
-3. Testar instalação global: `npx @seu-nome/bfl-mcp-server`
+1. Criar conta no NPM (se necessário)
+2. `npm publish` para publicar `@elhombrejd/bfl-mcp-server`
+3. Testar instalação global: `npx @elhombrejd/bfl-mcp-server`
 
 **Observação**: Não publiquei conforme instruções - deixando para você fazer ao final.
+
+## 👨‍💻 Desenvolvimento
+
+**Autor**: [@elhombrejd](https://github.com/elhombrejd)  
+**Repositório Sugerido**: `github.com/elhombrejd/bfl-mcp-server`  
+**Nome NPM**: `@elhombrejd/bfl-mcp-server`
 
 ---
 
