@@ -41,9 +41,9 @@ Servidor MCP (Model Context Protocol) para integração com a API da Black Fores
 
 ### ✅ 6. Documentação Completa
 - **README.md**: Guia completo de instalação e uso
-- **Exemplos**: Configuração para Claude Desktop
+- **Integração IDE**: Instruções para Claude Desktop, Claude Code, Cursor e Windsurf
 - **Parâmetros**: Documentação detalhada de todas as opções
-- **Troubleshooting**: Informações técnicas e links úteis
+- **Troubleshooting**: Verificação e solução de problemas comuns
 
 ## 🔧 Estrutura Técnica
 
@@ -67,12 +67,14 @@ bfl-mcp-server/
 npx @elhombrejd/bfl-mcp-server YOUR_BFL_API_KEY
 ```
 
-### Claude Desktop
+### IDEs Suportadas
+
+**Claude Desktop/Code/Cursor/Windsurf**:
 ```json
 {
   "mcpServers": {
     "bfl": {
-      "command": "npx",
+      "command": "npx", 
       "args": ["@elhombrejd/bfl-mcp-server"],
       "env": {
         "BFL_API_KEY": "sua-chave-aqui"
@@ -81,6 +83,8 @@ npx @elhombrejd/bfl-mcp-server YOUR_BFL_API_KEY
   }
 }
 ```
+
+**Verificação**: `/mcp` (Claude Code) ou interface gráfica nas demais IDEs
 
 ## 🧪 Testes Realizados
 

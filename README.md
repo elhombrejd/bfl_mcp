@@ -29,7 +29,9 @@ export BFL_API_KEY="your-api-key-here"
 npx @elhombrejd/bfl-mcp-server
 ```
 
-### Claude Desktop Integration
+## IDE Integration
+
+### Claude Desktop
 
 Add to your Claude Desktop configuration (`claude_desktop_config.json`):
 
@@ -46,6 +48,105 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
   }
 }
 ```
+
+### Claude Code
+
+1. **Via CLI Wizard** (Recommended):
+```bash
+claude mcp add bfl-server -e BFL_API_KEY=your-api-key-here -- npx @elhombrejd/bfl-mcp-server
+```
+
+2. **Via .claude.json** (Project-specific):
+Create or edit `.claude.json` in your project root:
+```json
+{
+  "mcpServers": {
+    "bfl": {
+      "command": "npx",
+      "args": ["@elhombrejd/bfl-mcp-server"],
+      "env": {
+        "BFL_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+3. **Using Environment Variables**:
+```json
+{
+  "mcpServers": {
+    "bfl": {
+      "command": "npx",
+      "args": ["@elhombrejd/bfl-mcp-server"],
+      "env": {
+        "BFL_API_KEY": "${BFL_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+### Cursor IDE
+
+1. **Enable MCP**: Go to Settings > Cursor Settings > MCP Servers and enable it
+
+2. **Project Configuration**: Create `.cursor/mcp.json` in your project:
+```json
+{
+  "mcpServers": {
+    "bfl": {
+      "command": "npx",
+      "args": ["-y", "@elhombrejd/bfl-mcp-server"],
+      "env": {
+        "BFL_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+3. **Global Configuration**: Create `~/.cursor/mcp.json` for system-wide access:
+```json
+{
+  "mcpServers": {
+    "bfl": {
+      "command": "npx",
+      "args": ["-y", "@elhombrejd/bfl-mcp-server"],
+      "env": {
+        "BFL_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+### Windsurf IDE
+
+1. **Via Plugin Store**: 
+   - Open Windsurf and navigate to Cascade assistant
+   - Click the Plugins icon in the top right menu
+   - Add custom server with our package
+
+2. **Manual Configuration**: 
+   - Click the hammer (MCP) icon in Cascade
+   - Click "Configure" to open `~/.codeium/windsurf/mcp_config.json`
+   - Add configuration:
+```json
+{
+  "mcpServers": {
+    "bfl": {
+      "command": "npx",
+      "args": ["-y", "@elhombrejd/bfl-mcp-server"],
+      "env": {
+        "BFL_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+3. **Reload**: Save and click "Refresh" in the Cascade assistant
 
 ## Available Tools
 
@@ -95,6 +196,34 @@ Edit an existing image using natural language instructions.
     "aspect_ratio": "16:9"
   }
 }
+```
+
+## Verification & Troubleshooting
+
+### Verify Installation
+
+After configuring in any IDE, you should see:
+
+- **Claude Desktop**: MCP tools available in chat
+- **Claude Code**: Run `/mcp` command to check status  
+- **Cursor**: Green dot with tools list in MCP section
+- **Windsurf**: Tools available in Cascade assistant
+
+### Common Issues
+
+1. **"Command not found"**: Ensure npx is installed (`npm install -g npm`)
+2. **"Permission denied"**: Try with `sudo` or check Node.js permissions  
+3. **"API key invalid"**: Verify your BFL API key at [bfl.ai](https://bfl.ai)
+4. **"Server not starting"**: Check IDE logs for detailed error messages
+
+### Testing the Server
+
+Test manually before IDE integration:
+```bash
+# Test the server directly
+npx @elhombrejd/bfl-mcp-server your-api-key
+
+# Should show: "BFL MCP Server running on stdio"
 ```
 
 ## API Key
