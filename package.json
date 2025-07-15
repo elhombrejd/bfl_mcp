@@ -1,5 +1,5 @@
 {
-  "name": "@elhombrejd/bfl-mcp-server",
+  "name": "@elhombrehd/bfl-mcp-server",
   "version": "1.0.0",
   "description": "Model Context Protocol server for Black Forest Labs FLUX image generation and editing",
   "type": "module",
@@ -23,13 +23,13 @@
     "bfl",
     "flux-kontext"
   ],
-  "author": "elhombrejd",
+  "author": "elhombrehd",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/elhombrejd/bfl-mcp-server.git"
+    "url": "https://github.com/elhombrehd/bfl_mcp.git"
   },
-  "homepage": "https://github.com/elhombrejd/bfl-mcp-server",
+  "homepage": "https://github.com/elhombrehd/bfl_mcp",
   "files": [
     "dist/**/*",
     "README.md"
