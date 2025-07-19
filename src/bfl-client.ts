@@ -27,11 +27,15 @@ export class BFLClient {
   }
 
   private async pollForResult(requestId: string): Promise<BFLApiResponse> {
-    const maxAttempts = 60; // 5 minutes with 5-second intervals
-    const pollInterval = 5000;
+    const maxAttempts = 20; // 1 minute with 3-second intervals
+    const pollInterval = 3000;
+
+    console.log(`[BFL] Starting polling for request ${requestId} (max ${maxAttempts} attempts, ${pollInterval/1000}s intervals)`);
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       try {
+        console.log(`[BFL] Polling attempt ${attempt + 1}/${maxAttempts} for ${requestId}`);
+        
         const response = await fetch(`${this.baseUrl}/v1/get_result?id=${requestId}`, {
           headers: {
             'x-key': this.config.apiKey,
@@ -39,28 +43,57 @@ export class BFLClient {
         });
 
         if (!response.ok) {
-          throw new Error(`Poll error: ${response.status} - ${response.statusText}`);
+          const errorMsg = `Poll error: ${response.status} - ${response.statusText}`;
+          console.log(`[BFL] ${errorMsg}`);
+          
+          // Don't retry on client errors (4xx)
+          if (response.status >= 400 && response.status < 500) {
+            throw new Error(errorMsg);
+          }
+          
+          throw new Error(errorMsg);
         }
 
         const result: PollResponse = await response.json();
+        console.log(`[BFL] Status: ${result.status}`);
 
         if (result.status === 'Ready') {
+          console.log(`[BFL] ✅ Image generation completed for ${requestId}`);
           return result;
         } else if (result.status === 'Error') {
-          throw new Error(`Generation failed: ${result.error || 'Unknown error'}`);
+          const errorMsg = `Generation failed: ${result.error || 'Unknown error'}`;
+          console.log(`[BFL] ❌ ${errorMsg}`);
+          throw new Error(errorMsg);
+        } else if (result.status === 'Processing') {
+          console.log(`[BFL] ⏳ Still processing, waiting ${pollInterval/1000}s...`);
         }
 
-        // Wait before next poll
-        await new Promise(resolve => setTimeout(resolve, pollInterval));
+        // Wait before next poll (only if not last attempt)
+        if (attempt < maxAttempts - 1) {
+          await new Promise(resolve => setTimeout(resolve, pollInterval));
+        }
       } catch (error) {
+        console.log(`[BFL] Error on attempt ${attempt + 1}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        
         if (attempt === maxAttempts - 1) {
+          console.log(`[BFL] ❌ Final attempt failed, giving up`);
           throw error;
         }
-        await new Promise(resolve => setTimeout(resolve, pollInterval));
+        
+        // For network errors, wait before retry
+        if (error instanceof Error && !error.message.includes('Poll error: 4')) {
+          console.log(`[BFL] Retrying in ${pollInterval/1000}s...`);
+          await new Promise(resolve => setTimeout(resolve, pollInterval));
+        } else {
+          // Don't retry 4xx errors
+          throw error;
+        }
       }
     }
 
-    throw new Error('Timeout: Image generation took too long');
+    const timeoutMsg = `Timeout: Image generation exceeded ${maxAttempts * pollInterval / 1000}s limit`;
+    console.log(`[BFL] ❌ ${timeoutMsg}`);
+    throw new Error(timeoutMsg);
   }
 
   async generateImage(request: GenerateImageRequest): Promise<string> {
