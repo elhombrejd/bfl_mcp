@@ -1,6 +1,6 @@
 {
   "name": "bfl-mcp-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Model Context Protocol server for Black Forest Labs FLUX image generation and editing",
   "type": "module",
   "bin": {
