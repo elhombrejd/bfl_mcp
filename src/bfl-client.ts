@@ -26,7 +26,7 @@ export class BFLClient {
     return response.json();
   }
 
-  private async pollForResult(requestId: string): Promise<BFLApiResponse> {
+  private async pollForResult(requestId: string, pollingUrl?: string): Promise<BFLApiResponse> {
     const maxAttempts = 20; // 1 minute with 3-second intervals
     const pollInterval = 3000;
 
@@ -36,7 +36,9 @@ export class BFLClient {
       try {
         console.log(`[BFL] Polling attempt ${attempt + 1}/${maxAttempts} for ${requestId}`);
         
-        const response = await fetch(`${this.baseUrl}/v1/get_result?id=${requestId}`, {
+        // Use polling URL if provided, otherwise construct from base URL
+        const url = pollingUrl || `${this.baseUrl}/v1/get_result?id=${requestId}`;
+        const response = await fetch(url, {
           headers: {
             'x-key': this.config.apiKey,
           },
@@ -64,8 +66,8 @@ export class BFLClient {
           const errorMsg = `Generation failed: ${result.error || 'Unknown error'}`;
           console.log(`[BFL] ❌ ${errorMsg}`);
           throw new Error(errorMsg);
-        } else if (result.status === 'Processing') {
-          console.log(`[BFL] ⏳ Still processing, waiting ${pollInterval/1000}s...`);
+        } else if (result.status === 'Processing' || result.status === 'Pending') {
+          console.log(`[BFL] ⏳ Still ${result.status.toLowerCase()}, waiting ${pollInterval/1000}s...`);
         }
 
         // Wait before next poll (only if not last attempt)
@@ -111,8 +113,13 @@ export class BFLClient {
         throw new Error('No request ID received from BFL API');
       }
 
+      // Log the polling URL if provided
+      if (response.polling_url) {
+        console.log(`[BFL] Using polling URL: ${response.polling_url}`);
+      }
+
       // Step 2: Poll for result
-      const result = await this.pollForResult(response.id);
+      const result = await this.pollForResult(response.id, response.polling_url);
 
       if (!result.result?.sample) {
         throw new Error('No image URL in response');
@@ -140,8 +147,13 @@ export class BFLClient {
         throw new Error('No request ID received from BFL API');
       }
 
+      // Log the polling URL if provided
+      if (response.polling_url) {
+        console.log(`[BFL] Using polling URL: ${response.polling_url}`);
+      }
+
       // Step 2: Poll for result
-      const result = await this.pollForResult(response.id);
+      const result = await this.pollForResult(response.id, response.polling_url);
 
       if (!result.result?.sample) {
         throw new Error('No image URL in response');

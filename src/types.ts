@@ -22,16 +22,17 @@ export interface EditImageRequest {
 
 export interface BFLApiResponse {
   id: string;
-  status: 'Ready' | 'Processing' | 'Error';
+  status: 'Ready' | 'Processing' | 'Pending' | 'Error';
   result?: {
     sample?: string; // URL to the generated image
   };
   error?: string;
+  polling_url?: string; // URL for polling the result
 }
 
 export interface PollResponse {
   id: string;
-  status: 'Ready' | 'Processing' | 'Error';
+  status: 'Ready' | 'Processing' | 'Pending' | 'Error';
   result?: {
     sample?: string;
   };
