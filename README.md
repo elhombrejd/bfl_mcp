@@ -4,6 +4,10 @@ Model Context Protocol (MCP) server for Black Forest Labs FLUX image generation 
 
 > 🎨 **Create and edit images with AI using natural language through the MCP protocol**
 
+<a href="https://glama.ai/mcp/servers/@elhombrejd/bfl_mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@elhombrejd/bfl_mcp/badge" alt="BFL Server MCP server" />
+</a>
+
 ## Features
 
 - 🎨 **Image Generation**: Generate high-quality images from text prompts using FLUX.1 Kontext Pro
